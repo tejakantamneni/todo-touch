@@ -9,11 +9,12 @@ Ext.setup({
     glossOnIcon: false,
     tabletStartupScreen: 'tablet_startup.png',
     phoneStartupScreen: 'phone_startup.png',
+    fullscreen: true,
     onReady: function() {
     	var buttonsSpec = [ { ui: 'confirm', text: 'Add' } ];
     	var overlay = new Ext.Panel({
             floating: true,
-            modal: true,
+            modal: false,
             centered: false,
             width: Ext.is.Phone ? 260 : 460,
             styleHtmlContent: true,
@@ -61,7 +62,6 @@ Ext.setup({
 
     	// The data list
     	var list = new Ext.List({
-    	    fullscreen: true,
     	    itemTpl : '{todoText} {dueDate}',
     	    grouped : true,
     	    indexBar: true,
@@ -76,7 +76,19 @@ Ext.setup({
     	        		fullscreen: true,
     	        		style: 'background-color:#E3E4FA;',
     	        		items: [list],
-    	        	    dockedItems: dockedItems,
+    	        	    dockedItems: [{
+    	                    xtype: "toolbar",
+    	                    title: 'Todo Manager',
+    	                    dock: "top",
+    	                    items: [
+    	                      {
+    	                        iconMask: true,
+    	                        ui: "plain",
+    	                        iconCls: "add",
+    	                        handler: tapHandler
+    	                      }
+    	                    ]
+    	                  }],
     	        	});
     	        }
     	    });
