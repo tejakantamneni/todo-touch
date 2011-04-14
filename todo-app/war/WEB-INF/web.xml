@@ -4,14 +4,16 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	
 	<servlet>
-		<servlet-name>Todo_app</servlet-name>
-		<servlet-class>com.tejakantamneni.Todo_appServlet</servlet-class>
+		<servlet-name>GetAllItems</servlet-name>
+		<servlet-class>com.teja.web.GetItemsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Todo_app</servlet-name>
-		<url-pattern>/todo_app</url-pattern>
+		<servlet-name>GetAllItems</servlet-name>
+		<url-pattern>/GetAllItems</url-pattern>
 	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

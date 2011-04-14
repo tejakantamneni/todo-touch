@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="D:/Installed/appengine-java-sdk-1.4.2/lib/impl/appengine-api-stubs.jar"/>
 	<classpathentry kind="lib" path="D:/Installed/apache-log4j-1.2.16/log4j-1.2.16.jar"/>
 	<classpathentry kind="lib" path="D:/Installed/commons-lang3-3.0-beta/commons-lang3-3.0-beta.jar"/>
+	<classpathentry kind="lib" path="D:/Installed/google-gson-1.6/gson-1.6.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
