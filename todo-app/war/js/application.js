@@ -63,7 +63,6 @@ Ext.setup({
     	// The data list
     	var list = new Ext.List({
     	    itemTpl : '{todoText} {dueDate}',
-    	    grouped : true,
     	    store: j_store
     	});
 
