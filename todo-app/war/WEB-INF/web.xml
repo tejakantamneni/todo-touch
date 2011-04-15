@@ -9,9 +9,18 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>GetAllItems</servlet-name>
 		<servlet-class>com.teja.web.GetItemsServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>CreateItem</servlet-name>
+		<servlet-class>com.teja.web.CreateItemServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>GetAllItems</servlet-name>
 		<url-pattern>/GetAllItems</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CreateItem</servlet-name>
+		<url-pattern>/CreateItem</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>

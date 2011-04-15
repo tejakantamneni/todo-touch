@@ -64,7 +64,6 @@ Ext.setup({
     	var list = new Ext.List({
     	    itemTpl : '{todoText} {dueDate}',
     	    grouped : true,
-    	    indexBar: true,
     	    store: j_store
     	});
 
@@ -92,31 +91,65 @@ Ext.setup({
     	        	});
     	        }
     	    });
+    	
+    	var form = new Ext.form.FormPanel({
+    		title: 'Create New Item',
+    		frame: true,
+    		url: '/CreateItem',
+            width: Ext.is.Phone ? 260 : 400,
+    		labelWidth:60,
+    		id:'newItemForm',
+    	    items: [
+    	        {
+    	            xtype: 'textareafield',
+    	            name : 'details',
+    	            label: 'Details'
+    	        },
+    	        {
+    	            xtype: 'datepickerfield',
+    	            name : 'dueDate',
+    	            label: 'Due On',
+    	            picker: {yearFrom: 2011}
+    	        },{
+    	        	xtype: 'button', flex: 1, 
+    	        	text: 'Save',
+    	        	handler: function(btn){
+    	        		var frm  = Ext.getCmp('newItemForm');
+    	        		frm.submit({
+    	        			url: '/CreateItem',
+    	        			method: 'POST',
+    	        			success: function(){
+    	        				overlay.hide();
+    	        				j_store.load();
+    	        			},
+    	        			failure: function(){
+    	        				alert('failed')
+    	        			}
+    	        		});
+    	        	}
+    	        }
+    	    ]
+    	});
+    	form.render('addItemForm');
+    	Ext.get('addItemForm').hide()
     	}
 });
 Ext.onReady(function(){
-	var form = new Ext.form.FormPanel({
-		renderTo: 'addItemForm',
-        width: Ext.is.Phone ? 260 : 400,
-		labelWidth:60,
-		id:'newItemForm',
-	    items: [
-	        {
-	            xtype: 'textareafield',
-	            name : 'details',
-	            label: 'Details'
-	        },
-	        {
-	            xtype: 'datepickerfield',
-	            name : 'dueDate',
-	            label: 'Due On',
-	            picker: {yearFrom: 2011}
-	        },{
-	        	xtype: 'button', flex: 1, 
-	        	text: 'Save'
+	var datetimePicker = new Ext.ux.touch.DateTimePicker({
+	    useTitles: true,
+	    id: 'dt',
+	    value: {
+	        day: 23,
+	        month: 2,
+	        year: 2000,
+	        hour: 13,
+	        minute: 45
+	    },
+	    listeners: {
+	        "hide": function(picker) {
+	            window.alert((picker.getValue()));
 	        }
-	    ]
+	    }
 	});
-	
-	Ext.get('addItemForm').hide()
+
 });
