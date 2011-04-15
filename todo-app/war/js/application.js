@@ -11,6 +11,12 @@ Ext.setup({
     phoneStartupScreen: 'phone_startup.png',
     fullscreen: true,
     onReady: function() {
+    	var currentDay = new Date().format('d');
+        var currentMonth = new Date().format('m');
+        var currentYear = new Date().format('Y');
+        
+        //alert(currentDay + " - " + currentMonth + " - " + currentYear)
+
     	var buttonsSpec = [ { ui: 'confirm', text: 'Add' } ];
     	var overlay = new Ext.Panel({
             floating: true,
@@ -108,7 +114,12 @@ Ext.setup({
     	            xtype: 'datepickerfield',
     	            name : 'dueDate',
     	            label: 'Due On',
-    	            picker: {yearFrom: 2011}
+    	            picker: {yearFrom: 2011},//alert(currentDay + " - " + currentMonth + " - " + currentYear)
+    	            value:{
+    	            	day: currentDay,
+    	            	month: currentMonth,
+    	                year: currentYear
+    	            }
     	        },{
     	        	xtype: 'button', flex: 1, 
     	        	text: 'Save',
