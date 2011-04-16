@@ -80,11 +80,11 @@ todo.ui.CreateForm = Ext.extend( Ext.form.FormPanel,{
 });
 
 todo.model.TodoItem = Ext.regModel("todo.model.TodoItem", {
-	fields : [ 'todoText', 'dueDate' ]
+	fields : [ {name: 'todoText', type: 'string'}, {name: 'dueDate', type: 'date'}  ]
 });
 
 todo.ui.TodoItemList = Ext.extend(Ext.List, {
-	itemTpl : '{todoText} {dueDate}',
+	itemTpl : '<div><span class="dueOn">{dueDate:date(\"m/d/Y h:i\")}</span><p><pre>{todoText}</pre></p> </div>',
 	itemCls : 'todoItem',
 	listeners : {
 		itemtap : function(list, index, element, event) {
@@ -95,7 +95,7 @@ todo.ui.TodoItemList = Ext.extend(Ext.List, {
 
 var todoItemStore = new Ext.data.Store({
     model  : 'todo.model.TodoItem',
-    sorters: 'todoText',
+    sorters: 'dueDate',
     getGroupString : function(record) {
         return record.get('todoText')[0];
     },
