@@ -4,8 +4,10 @@ var currentDay = new Date().format('d');
 var currentMonth = new Date().format('m');
 var currentYear = new Date().format('Y');
 
+var overlay;
+
 var showCreateForm = function(btn, event) {
-	var overlay = new todo.ui.CreateForm();
+	if(!overlay) overlay = new todo.ui.CreateForm();
 	overlay.showBy(btn);
 };
 
@@ -64,7 +66,10 @@ todo.ui.CreateForm = Ext.extend( Ext.form.FormPanel,{
         		frm.submit({
         			url: '/CreateItem',
         			method: 'POST',
-        			success: reloadTodoItems,
+        			success: function(){
+        				if(overlay) overlay.hide();
+        				reloadTodoItems();	
+        			},
         			failure: function(){
         				alert('failed')
         			}
@@ -83,7 +88,7 @@ todo.ui.TodoItemList = Ext.extend(Ext.List, {
 	itemCls : 'todoItem',
 	listeners : {
 		itemtap : function(list, index, element, event) {
-			console.log('selected: [' + typeof list.getStore().getAt(index).get('dueDate') + ']')
+			console.log('selected: [' +  list.getStore().getAt(index).get('dueDate') + ']')
 		}
 	}
 });
@@ -100,8 +105,8 @@ var todoItemStore = new Ext.data.Store({
         reader: {
             type: 'json',
         }
-    },
-    autoLoad:true
+    }
+    //,autoLoad:true
 });
 
 todo.ui.TodoItems = Ext.extend(Ext.Panel, {
@@ -114,6 +119,7 @@ todo.ui.TodoItems = Ext.extend(Ext.Panel, {
 		todo.ui.TodoItems.superclass.initComponent.apply(this, arguments);
 	},
 	onRender : function() {
+		reloadTodoItems();
 		todo.ui.TodoItems.superclass.onRender.apply(this, arguments);
 	}
 });
